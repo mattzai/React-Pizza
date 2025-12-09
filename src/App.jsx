@@ -6,11 +6,10 @@ import RegisterPage from "./views/RegisterPage";
 import LoginPage from "./views/LoginPage";
 
 function App() {
-  const [view, setView] = useState("home"); // 👈 Estado que controla la vista actual
-
+  const [view, setView] = useState("home"); 
   return (
     <div className="app-layout" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Navbar setView={setView} /> {/* 👈 Le pasamos la función al Navbar */}
+      <Navbar setView={setView} /> {}
 
       <div className="app-content" style={{ flex: 1 }}>
         {view === "home" && <Home />}

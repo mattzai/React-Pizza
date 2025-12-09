@@ -7,7 +7,7 @@ const Navbar = ({ setView }) => {
       <div className="d-flex gap-2">
         <button
           className="btn btn-outline-light"
-          onClick={() => setView("home")} // 👈 Cambia a Home
+          onClick={() => setView("home")} 
         >
           🍕 Home
         </button>
@@ -23,13 +23,13 @@ const Navbar = ({ setView }) => {
           <>
             <button
               className="btn btn-outline-light"
-              onClick={() => setView("login")} // 👈 Cambia a Login
+              onClick={() => setView("login")}
             >
               🔐 Login
             </button>
             <button
               className="btn btn-outline-light"
-              onClick={() => setView("register")} // 👈 Cambia a Register
+              onClick={() => setView("register")}
             >
               📝 Register
             </button>
