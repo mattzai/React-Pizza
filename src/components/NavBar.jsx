@@ -7,7 +7,7 @@ const Navbar = ({ setView }) => {
       <div className="d-flex gap-2">
         <button
           className="btn btn-outline-light"
-          onClick={() => setView("home")} 
+          onClick={() => setView("home")}
         >
           🍕 Home
         </button>
@@ -22,6 +22,13 @@ const Navbar = ({ setView }) => {
         ) : (
           <>
             <button
+              className="btn  btn-success"
+              onClick={() => setView("cart")}
+            >
+              🛒 Carrito
+            </button>
+
+            <button
               className="btn btn-outline-light"
               onClick={() => setView("login")}
             >
@@ -35,10 +42,6 @@ const Navbar = ({ setView }) => {
             </button>
           </>
         )}
-
-        <button className="btn btn-success">
-          🛒 Total: ${total.toLocaleString()}
-        </button>
       </div>
     </nav>
   );
