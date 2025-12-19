@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/NavBar";
 import Home from "./views/Home";
 import Footer from "./components/Footer";
+import Pizza from "./components/Pizza";
 import RegisterPage from "./views/RegisterPage";
 import LoginPage from "./views/LoginPage";
 import Cart from "./components/Cart";
