@@ -1,45 +1,42 @@
-const Navbar = ({ setView }) => {
-  const total = 25000;
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
   const token = false;
 
   return (
     <nav className="p-3 bg-dark text-light d-flex justify-content-between">
       <div className="d-flex gap-2">
-        <button
-          className="btn btn-outline-light"
-          onClick={() => setView("home")}
-        >
+        <Link to="/" className="btn btn-outline-light">
           🍕 Home
-        </button>
+        </Link>
       </div>
 
       <div className="d-flex gap-2">
         {token ? (
           <>
-            <button className="btn btn-outline-light">🔓 Profile</button>
+            <Link to="/profile" className="btn btn-outline-light">
+              🔓 Profile
+            </Link>
+
             <button className="btn btn-outline-light">🔒 Logout</button>
           </>
         ) : (
           <>
-            <button
-              className="btn  btn-success"
-              onClick={() => setView("cart")}
-            >
+            <Link to="/cart" className="btn btn-success">
               🛒 Carrito
-            </button>
+            </Link>
 
-            <button
-              className="btn btn-outline-light"
-              onClick={() => setView("login")}
-            >
+            <Link to="/login" className="btn btn-outline-light">
               🔐 Login
-            </button>
-            <button
-              className="btn btn-outline-light"
-              onClick={() => setView("register")}
-            >
+            </Link>
+
+            <Link to="/register" className="btn btn-outline-light">
               📝 Register
-            </button>
+            </Link>
+
+            <Link to="/NotFound" classname="btn btn-outline-light">
+              TestError
+            </Link>
           </>
         )}
       </div>
