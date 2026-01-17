@@ -1,4 +1,4 @@
-const CardPizza = ({ name, price, ingredients, img }) => {
+const CardPizza = ({ name, price, ingredients, img, onAdd }) => {
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={img} className="card-img-top" alt={name} />
@@ -11,6 +11,10 @@ const CardPizza = ({ name, price, ingredients, img }) => {
             <li key={i}>{ing}</li>
           ))}
         </ul>
+
+        <button className="btn btn-danger" onClick={onAdd}>
+          Añadir 🛒
+        </button>
 
         <p className="fw-bold">${price.toLocaleString()}</p>
       </div>

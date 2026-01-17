@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import Header from "../components/Header";
-//import pizzas from "../pizzas";
 import CardPizza from "../components/CardPizza";
 
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/pizzas")
       .then((res) => res.json())
-      .then((data) => setPizzas(data));
+      .then((data) => setPizzas(data))
+      .catch((error) => console.error(error));
   }, []);
-
-
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -26,6 +26,7 @@ const Home = () => {
             price={pizza.price}
             ingredients={pizza.ingredients}
             img={pizza.img}
+            onAdd={() => addToCart(pizza)}
           />
         ))}
       </div>

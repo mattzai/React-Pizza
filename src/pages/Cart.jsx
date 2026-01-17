@@ -1,64 +1,56 @@
-import { useState } from "react";
-import { pizzaCart } from "../pizzas";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
-
-  const increase = (id) => {
-    const updated = cart.map((item) =>
-      item.id === id ? { ...item, count: item.count + 1 } : item
-    );
-    setCart(updated);
-  };
-
-  const decrease = (id) => {
-    const updated = cart
-      .map((item) =>
-        item.id === id ? { ...item, count: item.count - 1 } : item
-      )
-      .filter((item) => item.count > 0);
-
-    setCart(updated);
-  };
-
-  const total = cart.reduce((acc, item) => acc + item.price * item.count, 0);
+  const { cart, addToCart, removeFromCart, total } = useContext(CartContext);
 
   return (
     <div className="container mt-4">
       <h2>Carrito de compras</h2>
 
-      {cart.map((item) => (
-        <div key={item.id} className="d-flex align-items-center gap-3 my-3">
-          <img src={item.img} width={100} alt={item.name} />
+      {cart.length === 0 ? (
+        <p>El carrito está vacío</p>
+      ) : (
+        cart.map((item) => (
+          <div
+            key={item.id}
+            className="d-flex align-items-center gap-3 my-3"
+          >
+            <img src={item.img} width={80} alt={item.name} />
 
-          <div>
-            <h5>{item.name}</h5>
-            <p>${item.price.toLocaleString()}</p>
-          </div>
+            <div>
+              <h5 className="mb-1 text-capitalize">{item.name}</h5>
+              <p className="mb-0">${item.price.toLocaleString()}</p>
+            </div>
 
-          <div className="ms-auto d-flex gap-2">
-            <button
-              className="btn btn-danger"
-              onClick={() => decrease(item.id)}
-            >
-              -
-            </button>
-            <span>{item.count}</span>
-            <button
-              className="btn btn-success"
-              onClick={() => increase(item.id)}
-            >
-              +
-            </button>
+            <div className="ms-auto d-flex align-items-center gap-2">
+              <button
+                className="btn btn-danger"
+                onClick={() => removeFromCart(item.id)}
+              >
+                -
+              </button>
+
+              <span>{item.count}</span>
+
+              <button
+                className="btn btn-success"
+                onClick={() => addToCart(item)}
+              >
+                +
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
 
       <hr />
 
       <h4>Total: ${total.toLocaleString()}</h4>
 
-      <button className="btn btn-primary mt-3 w-100">Pagar</button>
+      <button className="btn btn-primary mt-3 w-100">
+        Pagar
+      </button>
     </div>
   );
 };
