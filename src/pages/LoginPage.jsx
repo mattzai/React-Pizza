@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
+
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +23,10 @@ const LoginPage = () => {
       return;
     }
 
+    // ✅ LOGIN SIMULADO (lo que pide el hito)
+    login(email);
     setMensaje("✅ ¡Inicio de sesión exitoso!");
+    navigate("/profile");
   };
 
   return (
@@ -42,7 +50,9 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="btn btn-success w-100 mt-3">Ingresar</button>
+        <button className="btn btn-success w-100 mt-3">
+          Ingresar
+        </button>
       </form>
 
       <p className="mt-3">{mensaje}</p>

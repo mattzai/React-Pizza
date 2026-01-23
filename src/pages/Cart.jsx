@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, total } = useContext(CartContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div className="container mt-4">
@@ -12,10 +14,7 @@ const Cart = () => {
         <p>El carrito está vacío</p>
       ) : (
         cart.map((item) => (
-          <div
-            key={item.id}
-            className="d-flex align-items-center gap-3 my-3"
-          >
+          <div key={item.id} className="d-flex align-items-center gap-3 my-3">
             <img src={item.img} width={80} alt={item.name} />
 
             <div>
@@ -48,7 +47,7 @@ const Cart = () => {
 
       <h4>Total: ${total.toLocaleString()}</h4>
 
-      <button className="btn btn-primary mt-3 w-100">
+      <button className="btn btn-primary mt-3 w-100" disabled={!user}>
         Pagar
       </button>
     </div>

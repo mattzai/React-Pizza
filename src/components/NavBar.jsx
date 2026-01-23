@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
-  const token = false;
   const { total } = useContext(CartContext);
+  const { user, logout } = useContext(UserContext);
 
   return (
     <nav className="p-3 bg-dark text-light d-flex justify-content-between">
@@ -15,14 +15,24 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="d-flex gap-2">
-        {token ? (
+      <div className="d-flex gap-2 align-items-center">
+        {user ? (
           <>
+
+          <Link to="/cart" className="btn btn-success">
+              🛒 Total: ${total.toLocaleString()}
+            </Link>
+
             <Link to="/profile" className="btn btn-outline-light">
               🔓 Profile
             </Link>
 
-            <button className="btn btn-outline-light">🔒 Logout</button>
+            <button
+              className="btn btn-outline-light"
+              onClick={logout}
+            >
+              🔒 Logout
+            </button>
           </>
         ) : (
           <>
@@ -36,10 +46,6 @@ const Navbar = () => {
 
             <Link to="/register" className="btn btn-outline-light">
               📝 Register
-            </Link>
-
-            <Link to="/NotFound" className="btn btn-outline-light">
-              TestError
             </Link>
           </>
         )}
