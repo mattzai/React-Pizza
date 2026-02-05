@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, total } = useContext(CartContext);
   const { user } = useContext(UserContext);
+  const [success, setSuccess] = useState(false);
+
+  const handleCheckout = () => {
+    setSuccess(true);
+  };
 
   return (
     <div className="container mt-4">
@@ -47,9 +52,25 @@ const Cart = () => {
 
       <h4>Total: ${total.toLocaleString()}</h4>
 
-      <button className="btn btn-primary mt-3 w-100" disabled={!user}>
+      <button
+        className="btn btn-primary mt-3 w-100"
+        disabled={!user}
+        onClick={handleCheckout}
+      >
         Pagar
       </button>
+
+      {!user && (
+        <p className="text-danger mt-2">
+          Debes iniciar sesión para pagar
+        </p>
+      )}
+
+      {success && (
+        <p className="text-success mt-3">
+          Compra realizada con éxito ✅
+        </p>
+      )}
     </div>
   );
 };

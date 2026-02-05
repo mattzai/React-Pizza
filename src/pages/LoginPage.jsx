@@ -10,7 +10,7 @@ const LoginPage = () => {
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -23,10 +23,13 @@ const LoginPage = () => {
       return;
     }
 
-    // ✅ LOGIN SIMULADO (lo que pide el hito)
-    login(email);
-    setMensaje("✅ ¡Inicio de sesión exitoso!");
-    navigate("/profile");
+    try {
+      await login(email, password);
+      setMensaje("✅ ¡Inicio de sesión exitoso!");
+      navigate("/profile");
+    } catch (error) {
+      setMensaje("❌ Error al iniciar sesión");
+    }
   };
 
   return (
@@ -55,7 +58,7 @@ const LoginPage = () => {
         </button>
       </form>
 
-      <p className="mt-3">{mensaje}</p>
+      {mensaje && <p className="mt-3">{mensaje}</p>}
     </div>
   );
 };

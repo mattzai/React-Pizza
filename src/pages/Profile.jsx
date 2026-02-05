@@ -12,9 +12,10 @@ const Profile = () => {
   return (
     <div className="container text-center mt-5">
       <h2>Perfil del usuario</h2>
+
       <p>Email: {user.email}</p>
 
-      <button className="btn btn-danger" onClick={logout}>
+      <button className="btn btn-danger mt-3" onClick={logout}>
         Cerrar sesión
       </button>
     </div>
